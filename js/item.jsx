@@ -3,15 +3,20 @@ var app = app || {};
 (function () {
 	'use strict';
 
-	var ShoppingListItem = React.createClass({
+	app.ShoppingListItem = React.createClass({
+		handleRemove: function() {
+			this.props.onItemRemoved(this.props.index);
+		},
 		render: function() {
-	    return (
-	      <div className="shopping-list-item">
-	        <span> { this.props.qty } { this.props.unit } </span>
-	        x
-	        <span> { this.props.item } </span>
-	      </div>
-	    );
-	  }
+			var item = this.props.item;
+			return (
+					<div className="shopping-list-item">
+						<span> { item.qty } { item.unit } </span>
+						<span> x </span>
+						<span> { item.name } </span>
+						<a href="javascript:void(0)" onClick={ this.handleRemove }> x </a>
+					</div>
+			);
+		}
 	});
 })();

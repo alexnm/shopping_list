@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/alexnm/shopping_list/issues"
   },
-  "homepage": "https://github.com/alexnm/shopping_list"
+  "homepage": "https://github.com/alexnm/shopping_list",
+  "dependencies": {
+    "serve-static": "~1.8.1",
+    "connect": "~3.3.4"
+  }
 }
