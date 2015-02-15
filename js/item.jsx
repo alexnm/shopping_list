@@ -4,17 +4,26 @@ var app = app || {};
 	'use strict';
 
 	app.ShoppingListItem = React.createClass({
-		handleRemove: function() {
+		handleRemove: function( event ) {
+			event.stopPropagation();
 			this.props.onItemRemoved(this.props.index);
+		},
+		handleCheck: function() {
+			this.props.onItemChecked(this.props.index);
 		},
 		render: function() {
 			var item = this.props.item;
+			var itemClass = React.addons.classSet({
+				'shopping-list-item': true,
+				'checked': item.checked
+			});
+			var removeLink = item.checked ? '' : (<a className="delete" href="javascript:void(0)" onClick={ this.handleRemove }> x </a>)
 			return (
-					<div className="shopping-list-item">
-						<span> { item.qty } { item.unit } </span>
-						<span> x </span>
+					<div className={ itemClass } onClick={ this.handleCheck }>
 						<span> { item.name } </span>
-						<a href="javascript:void(0)" onClick={ this.handleRemove }> x </a>
+						-
+						<span> { item.qty } { item.unit } </span>
+						{ removeLink }
 					</div>
 			);
 		}
