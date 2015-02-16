@@ -10,6 +10,24 @@
 	text-decoration: none;
 }
 
+.example-enter {
+	transform: scaleY(0);
+	transition: all .3s;
+}
+
+.example-enter.example-enter-active {
+	transform: scaleY(1);
+}
+
+.example-leave {
+	transform: scaleY(1);
+	transition: all .3s;
+}
+
+.example-leave.example-leave-active {
+	transform: scaleY(0);
+}
+
 .input[type='text'] {
 	width: 150px;
 }
@@ -22,11 +40,6 @@
 	margin: 10px;
 	font-size: 18px;
 	cursor: pointer;
-	-webkit-transition: display 2s ease-in;
-	-moz-transition: display 2s ease-in;
-	-o-transition: display 2s ease-in;
-	-ms-transition: display 2s ease-in;
-	transition: display 2s ease-in;
 }
 
 .shopping-list-item.checked {

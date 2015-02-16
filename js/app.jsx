@@ -43,7 +43,9 @@ var app = app || {};
 			}.bind(this));
 			return (
 					<div>
-						{ itemList }
+						<ReactCSSTransitionGroup transitionName="example">
+							{ itemList }
+						</ReactCSSTransitionGroup>
 						<ItemForm onItemAdded = { this.addItem } />
 					</div>
 			);
