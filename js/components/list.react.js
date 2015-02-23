@@ -1,31 +1,34 @@
 var React = require('react/addons');
 var ItemForm = require('./item_form.react')
 var ShoppingListItem = require('./item.react')
+var ShoppingListStore = require('../stores/shopping_list_store');
+var ShoppingListActions = require('../actions/shopping_list_actions');
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var ShoppingList = React.createClass({
 	componentDidMount: function() {
-		this.setState( { items: this.props.items } );
+		ShoppingListStore.addChangeListener(this.onChange);
+	},
+	onChange: function() {
+		this.setState( { items: ShoppingListStore.getAll() } );
 	},
 	addItem: function( newItem ) {
-		this.state.items.push(newItem);
-		this.setState( { items: this.state.items } );
+		ShoppingListActions.addItem( newItem );
 	},
 	removeItem: function( index ) {
-		this.state.items.splice(index, 1);
-		this.setState( { items: this.state.items } );
+		ShoppingListActions.removeItem( index );
 	},
 	toggleItem: function( index ) {
 		this.state.items[index].checked = !this.state.items[index].checked;
 		this.setState( { items: this.state.items } );
 	},
 	getInitialState: function() {
-		return { items : [] };
+		return { items : ShoppingListStore.getAll() };
 	},
 	render: function() {
 
-		var itemList = this.props.items.map( function(item, index) {
+		var itemList = this.state.items.map( function(item, index) {
 			return (
 				<ShoppingListItem
 						key = { index }
