@@ -8,6 +8,13 @@ var Actions = {
     });
 	},
 
+	checkItem : function(index) {
+		Dispatcher.dispatch({
+      actionType: this.CHECK_ITEM,
+      index: index
+    });
+	},
+
 	removeItem : function(index) {
 		Dispatcher.dispatch({
       actionType: this.REMOVE_ITEM,
@@ -16,7 +23,8 @@ var Actions = {
 	},
 
 	ADD_ITEM : 'ADD_ITEM',
-	REMOVE_ITEM : 'REMOVE_ITEM'
+	REMOVE_ITEM : 'REMOVE_ITEM',
+	CHECK_ITEM : 'CHECK_ITEM'
 };
 
 module.exports = Actions;

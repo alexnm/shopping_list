@@ -10,6 +10,9 @@ var ShoppingList = React.createClass({
 	componentDidMount: function() {
 		ShoppingListStore.addChangeListener(this.onChange);
 	},
+	componentWillUnmount: function() {
+		ShoppingListStore.removeChangeListener(this.onChange);
+	},
 	onChange: function() {
 		this.setState( { items: ShoppingListStore.getAll() } );
 	},
@@ -20,8 +23,7 @@ var ShoppingList = React.createClass({
 		ShoppingListActions.removeItem( index );
 	},
 	toggleItem: function( index ) {
-		this.state.items[index].checked = !this.state.items[index].checked;
-		this.setState( { items: this.state.items } );
+		ShoppingListActions.checkItem( index );
 	},
 	getInitialState: function() {
 		return { items : ShoppingListStore.getAll() };

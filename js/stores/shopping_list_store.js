@@ -27,13 +27,16 @@ Dispatcher.register(function(action) {
   switch(action.actionType) {
   	case ShoppingListActions.ADD_ITEM:
   		items.push(action.item);
-  		Store.emitChange();
   		break;
+    case ShoppingListActions.CHECK_ITEM:
+      items[action.index].checked = !items[action.index].checked;
+      break;
   	case ShoppingListActions.REMOVE_ITEM:
   		items.splice(action.index, 1);
-  		Store.emitChange();
-  		break;
+  		break;  
   }
+
+  Store.emitChange();
 });
 
 module.exports = Store;
