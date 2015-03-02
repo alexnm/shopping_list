@@ -34,6 +34,9 @@ Dispatcher.register(function(action) {
   	case ShoppingListActions.REMOVE_ITEM:
   		items.splice(action.index, 1);
   		break;  
+    case ShoppingListActions.RECEIVE_DATA:
+      items = action.data;
+      break;
   }
 
   Store.emitChange();
