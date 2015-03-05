@@ -1,5 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher');
-var $ = require('jquery');
+var request = require('superagent');
 
 var Actions = {
 	addItem : function(item) {
@@ -8,35 +8,30 @@ var Actions = {
       item: item
     });
 
-    $.ajax('/api/add', {
-    	type: 'POST',
-			data: item
-		});
+		request.post('/api/add').send(item).end();
 	},
 
 	checkItem : function(index) {
-		$.ajax('/api/check/' + index, {
-			type: 'PATCH'
-		});
 		Dispatcher.dispatch({
       actionType: this.CHECK_ITEM,
       index: index
     });
+
+    request.patch('/api/check/' + index).end();
 	},
 
 	removeItem : function(index) {
-		$.ajax('/api/remove/' + index, {
-			type: 'DELETE'
-		});
 		Dispatcher.dispatch({
       actionType: this.REMOVE_ITEM,
       index: index
     });
+
+    request.del('/api/remove/' + index).end();
 	},
 
 	getData: function() {
-		$.get('/api/list', function(response) {
-			Actions.receiveData(response.data)
+		request.get('/api/list').end(function(response) {
+			Actions.receiveData(response.body.data);
 		});
 	},
 
